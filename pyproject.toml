@@ -1,0 +1,27 @@
+[project]
+name = "sales-agent-workspace"
+version = "0.2.0"
+description = "AI revenue & sales operations agent — workspace root"
+readme = "README.md"
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = [
+  "packages/playbook_engine/tests",
+  "packages/eval/tests",
+  "packages/tools_hubspot/tests",
+  "apps/sales-api/tests",
+]
+pythonpath = [
+  "packages/playbook_engine/src",
+  "packages/eval/src",
+  "packages/tools_hubspot/src",
+  "apps/sales-api/src",
+]

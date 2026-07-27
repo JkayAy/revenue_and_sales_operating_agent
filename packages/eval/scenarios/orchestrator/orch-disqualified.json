@@ -1,0 +1,17 @@
+{
+  "id": "orch-disqualified",
+  "category": "orchestrator",
+  "mock_fixtures": {
+    "email": "bad@casino.io",
+    "first_name": "Sam",
+    "company": "Casino Co",
+    "employee_count": 500,
+    "country": "US",
+    "industry": "gambling"
+  },
+  "expect": {
+    "qualified": false,
+    "status": "disqualified",
+    "has_draft": false
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "id": "icp-deny-small",
+  "category": "playbook",
+  "playbook_action": "icp",
+  "mock_fixtures": {
+    "employee_count": 10,
+    "country": "US",
+    "industry": "software"
+  },
+  "expect": { "playbook": "icp_disqualified", "code": "icp_too_small" }
+}

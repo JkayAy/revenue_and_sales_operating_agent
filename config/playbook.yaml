@@ -1,0 +1,15 @@
+icp:
+  employee_count_min: 50
+  employee_count_max: 500
+  allowed_countries: [US, GB, DE]
+  blocked_industries: [gambling, adult]
+
+outreach:
+  max_drafts_per_lead_per_day: 2
+  required_citations_min: 1
+  tone: consultative
+
+pipeline:
+  on_approve_first_touch:
+    deal_stage_id: attempting_contact
+  require_approval_for_stage_change: true

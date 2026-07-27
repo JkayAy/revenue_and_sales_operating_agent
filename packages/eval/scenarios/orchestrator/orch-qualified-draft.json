@@ -1,0 +1,17 @@
+{
+  "id": "orch-qualified-draft",
+  "category": "orchestrator",
+  "mock_fixtures": {
+    "email": "alex@acme.io",
+    "first_name": "Alex",
+    "company": "Acme Analytics",
+    "employee_count": 120,
+    "country": "US",
+    "industry": "software"
+  },
+  "expect": {
+    "qualified": true,
+    "status": "awaiting_approval",
+    "has_draft": true
+  }
+}

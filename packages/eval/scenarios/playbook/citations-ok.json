@@ -1,0 +1,7 @@
+{
+  "id": "citations-ok",
+  "category": "playbook",
+  "playbook_action": "citations",
+  "mock_fixtures": { "sources_count": 2 },
+  "expect": { "playbook": "citations_ok" }
+}

@@ -1,0 +1,11 @@
+{
+  "id": "icp-deny-geo",
+  "category": "playbook",
+  "playbook_action": "icp",
+  "mock_fixtures": {
+    "employee_count": 120,
+    "country": "BR",
+    "industry": "software"
+  },
+  "expect": { "playbook": "icp_disqualified", "code": "icp_geo_denied" }
+}

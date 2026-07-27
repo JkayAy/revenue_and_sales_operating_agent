@@ -1,0 +1,70 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-sales}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sales}
+      POSTGRES_DB: ${POSTGRES_DB:-sales_agent}
+    ports:
+      - "${POSTGRES_HOST_PORT:-5434}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-sales} -d ${POSTGRES_DB:-sales_agent}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  migrate:
+    image: postgres:16-alpine
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD:-sales}
+      PGUSER: ${POSTGRES_USER:-sales}
+      PGDATABASE: ${POSTGRES_DB:-sales_agent}
+    volumes:
+      - ./infra/migrations:/migrations:ro
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        set -e
+        for f in /migrations/*.sql; do
+          echo "Applying $$f"
+          psql -h postgres -U "$$PGUSER" -d "$$PGDATABASE" -v ON_ERROR_STOP=1 -f "$$f"
+        done
+    restart: "no"
+
+  sales-api:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.api
+    ports:
+      - "${SALES_API_HOST_PORT:-8000}:8000"
+    environment:
+      PLAYBOOK_CONFIG_PATH: config/playbook.yaml
+      MOCK_TOOLS: ${MOCK_TOOLS:-true}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-sales}:${POSTGRES_PASSWORD:-sales}@postgres:5432/${POSTGRES_DB:-sales_agent}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+      ADMIN_API_KEY: ${ADMIN_API_KEY:-}
+      HUBSPOT_ACCESS_TOKEN: ${HUBSPOT_ACCESS_TOKEN:-}
+      HUBSPOT_WEBHOOK_SECRET: ${HUBSPOT_WEBHOOK_SECRET:-}
+      HUBSPOT_CLIENT_ID: ${HUBSPOT_CLIENT_ID:-}
+      HUBSPOT_CLIENT_SECRET: ${HUBSPOT_CLIENT_SECRET:-}
+      HUBSPOT_REDIRECT_URI: ${HUBSPOT_REDIRECT_URI:-http://127.0.0.1:8000/v1/integrations/hubspot/callback}
+      LLM_DRAFT_ENABLED: ${LLM_DRAFT_ENABLED:-false}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+volumes:
+  pgdata:

@@ -1,0 +1,7 @@
+{
+  "id": "citations-fail",
+  "category": "playbook",
+  "playbook_action": "citations",
+  "mock_fixtures": { "sources_count": 0 },
+  "expect": { "playbook": "citations_insufficient", "code": "citation_insufficient" }
+}
