@@ -10,6 +10,7 @@ if ($Build) {
 }
 
 docker compose up -d
-Write-Host "Sales API: http://localhost:8000"
+$port = if ($env:SALES_API_HOST_PORT) { $env:SALES_API_HOST_PORT } else { "8001" }
+Write-Host "Sales API: http://localhost:$port"
 Write-Host "Postgres: localhost:5434"
-Write-Host "Ready check: curl http://localhost:8000/ready"
+Write-Host "Ready check: curl http://localhost:$port/ready"

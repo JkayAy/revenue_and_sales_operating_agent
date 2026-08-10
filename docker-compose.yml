@@ -41,7 +41,7 @@ services:
       context: .
       dockerfile: infra/Dockerfile.api
     ports:
-      - "${SALES_API_HOST_PORT:-8000}:8000"
+      - "${SALES_API_HOST_PORT:-8001}:8000"
     environment:
       PLAYBOOK_CONFIG_PATH: config/playbook.yaml
       MOCK_TOOLS: ${MOCK_TOOLS:-true}
@@ -52,7 +52,7 @@ services:
       HUBSPOT_WEBHOOK_SECRET: ${HUBSPOT_WEBHOOK_SECRET:-}
       HUBSPOT_CLIENT_ID: ${HUBSPOT_CLIENT_ID:-}
       HUBSPOT_CLIENT_SECRET: ${HUBSPOT_CLIENT_SECRET:-}
-      HUBSPOT_REDIRECT_URI: ${HUBSPOT_REDIRECT_URI:-http://127.0.0.1:8000/v1/integrations/hubspot/callback}
+      HUBSPOT_REDIRECT_URI: ${HUBSPOT_REDIRECT_URI:-http://127.0.0.1:8001/v1/integrations/hubspot/callback}
       LLM_DRAFT_ENABLED: ${LLM_DRAFT_ENABLED:-false}
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
