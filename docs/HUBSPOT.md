@@ -2,6 +2,8 @@
 
 Connect a **HubSpot private app** or **OAuth app** for live CRM notes and deal stage updates after rep approval.
 
+> **Verification status:** Mock HubSpot (`MockHubSpotClient`) and webhook signature checks are covered by unit tests. `LiveHubSpotClient`, OAuth callback, token refresh, and real CRM writes have **not** been exercised against a live HubSpot account in this repository. Treat live setup as operator-tested only.
+
 ---
 
 ## 1. Private app (fastest for demo)
@@ -34,7 +36,7 @@ Set in `.env`:
 ```env
 HUBSPOT_CLIENT_ID=
 HUBSPOT_CLIENT_SECRET=
-HUBSPOT_REDIRECT_URI=http://127.0.0.1:8000/v1/integrations/hubspot/callback
+HUBSPOT_REDIRECT_URI=http://127.0.0.1:8001/v1/integrations/hubspot/callback
 ```
 
 1. Open `GET /v1/integrations/hubspot/authorize` → HubSpot consent  
