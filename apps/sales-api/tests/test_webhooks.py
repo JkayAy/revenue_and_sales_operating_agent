@@ -2,7 +2,6 @@ import hashlib
 import json
 
 from fastapi.testclient import TestClient
-
 from sales_api.config import settings
 from sales_api.main import create_app
 
