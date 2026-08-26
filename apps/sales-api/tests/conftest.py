@@ -1,5 +1,4 @@
 import pytest
-
 from sales_api.config import settings
 
 
