@@ -140,8 +140,7 @@ def bump_metric(name: str, delta: float = 1) -> None:
 def get_metrics() -> dict[str, Any]:
     if db_enabled():
         return pg.pg_get_metrics()
-        drafts = [lead for lead in _leads.values() if lead.status == "awaiting_approval"]
-    return {
+    drafts = [lead for lead in _leads.values() if lead.status == "awaiting_approval"]    return {
         **_metrics,
         "queue_depth": len(drafts),
         "total_leads": len(_leads),
