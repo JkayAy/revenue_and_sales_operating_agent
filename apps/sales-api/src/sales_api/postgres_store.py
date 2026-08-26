@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime
 from typing import Any
 from uuid import UUID
 
@@ -77,7 +76,11 @@ def _fetch_runs_for_lead(conn: Any, lead_id: str, limit: int = 5) -> list[LeadRu
             ToolRunRecord(
                 tool_name=tr[0],
                 input_json=tr[1] if isinstance(tr[1], dict) else json.loads(tr[1] or "{}"),
-                output_json=tr[2] if tr[2] is None or isinstance(tr[2], dict) else json.loads(tr[2]),
+                output_json=(
+                    json.loads(tr[2])
+                    if tr[2] and not isinstance(tr[2], dict)
+                    else tr[2]
+                ),
                 status=tr[3],
                 idempotency_key=tr[4],
                 latency_ms=tr[5],
