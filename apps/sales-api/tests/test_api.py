@@ -1,5 +1,4 @@
 from fastapi.testclient import TestClient
-
 from sales_api.main import create_app
 
 
