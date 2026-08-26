@@ -87,11 +87,15 @@ def run_orchestrator_scenario(scenario: dict[str, Any]) -> ScenarioResult:
             f"expected qualified={expect['qualified']}, got {result.qualified}",
         )
     if expect.get("status") and result.status != expect["status"]:
-        return ScenarioResult(sid, False, f"expected status {expect['status']}, got {result.status}")
+        return ScenarioResult(
+            sid, False, f"expected status {expect['status']}, got {result.status}"
+        )
     if expect.get("has_draft") is not None:
         has = result.draft is not None
         if has != expect["has_draft"]:
-            return ScenarioResult(sid, False, f"expected has_draft={expect['has_draft']}, got {has}")
+            return ScenarioResult(
+                sid, False, f"expected has_draft={expect['has_draft']}, got {has}"
+            )
     return ScenarioResult(sid, True, "ok")
 
 
