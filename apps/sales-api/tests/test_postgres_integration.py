@@ -1,7 +1,7 @@
 import os
 
-import pytest
 from fastapi.testclient import TestClient
+import pytest
 
 from sales_api.config import settings
 from sales_api.main import create_app
