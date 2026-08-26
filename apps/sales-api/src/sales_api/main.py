@@ -9,7 +9,7 @@ from fastapi.responses import JSONResponse
 from playbook_engine import PlaybookEngine, load_playbook_config
 
 from sales_api.config import settings
-from sales_api.database import check_database, load_flags_from_db
+from sales_api.database import load_flags_from_db
 from sales_api.observability import configure_logging, tracing_middleware
 from sales_api.orchestrator import LeadOrchestrator
 from sales_api.rate_limit import rate_limit_middleware
