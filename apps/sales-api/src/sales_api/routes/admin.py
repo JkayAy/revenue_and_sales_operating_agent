@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request
 from pydantic import BaseModel
 
 from sales_api.database import persist_flag
-from sales_api.store import get_flags, get_metrics, set_flag
+from sales_api.store import get_metrics, set_flag
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
