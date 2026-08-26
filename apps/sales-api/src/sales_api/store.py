@@ -1,9 +1,8 @@
 from __future__ import annotations
 
 import time
-from typing import Any
 import uuid as uuid_lib
-
+from typing import Any
 from tools_hubspot import LiveHubSpotClient, MockHubSpotClient
 
 from sales_api import postgres_store as pg
@@ -113,7 +112,7 @@ def list_leads(status: str | None = None) -> list[Lead]:
     items = list(_leads.values())
     items.sort(key=lambda x: x.created_at, reverse=True)
     if status:
-        items = [l for l in items if l.status == status]
+            items = [lead for lead in items if lead.status == status]
     return items
 
 
@@ -140,7 +139,7 @@ def bump_metric(name: str, delta: float = 1) -> None:
 def get_metrics() -> dict[str, Any]:
     if db_enabled():
         return pg.pg_get_metrics()
-    drafts = [l for l in _leads.values() if l.status == "awaiting_approval"]
+        drafts = [lead for lead in _leads.values() if lead.status == "awaiting_approval"]
     return {
         **_metrics,
         "queue_depth": len(drafts),
