@@ -20,6 +20,7 @@ from sales_api.store import (
     save_lead,
 )
 
+
 def process_ingest(
     engine: PlaybookEngine,
     orch: LeadOrchestrator,
