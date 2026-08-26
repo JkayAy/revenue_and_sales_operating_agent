@@ -95,7 +95,7 @@ def ingest(body: IngestBody, request: Request) -> dict[str, Any]:
 
 @router.get("")
 def leads_list(status: str | None = None) -> dict[str, Any]:
-        items = [_serialize_lead(lead) for lead in list_leads(status=status)]
+    items = [_serialize_lead(lead) for lead in list_leads(status=status)]
     return {"leads": items}
 
 
