@@ -15,11 +15,10 @@ from sales_api.store import (
     get_flags,
     get_lead,
     is_opt_out,
+    new_id,
     record_approval,
     save_lead,
-    new_id,
 )
-
 
 def process_ingest(
     engine: PlaybookEngine,
