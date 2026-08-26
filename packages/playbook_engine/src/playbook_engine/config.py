@@ -45,7 +45,9 @@ def load_playbook_config(path: Path | str | None = None) -> PlaybookConfig:
             employee_count_min=int(icp.get("employee_count_min", 50)),
             employee_count_max=int(icp.get("employee_count_max", 500)),
             allowed_countries=[c.upper() for c in icp.get("allowed_countries", ["US", "GB", "DE"])],
-            blocked_industries=[i.lower() for i in icp.get("blocked_industries", ["gambling", "adult"])],
+            blocked_industries=[
+                i.lower() for i in icp.get("blocked_industries", ["gambling", "adult"])
+            ],
         ),
         outreach=OutreachConfig(
             max_drafts_per_lead_per_day=int(outreach.get("max_drafts_per_lead_per_day", 2)),
