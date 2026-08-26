@@ -1,7 +1,6 @@
 """End-to-end: ingest → qualify → enrich → research → draft → queue → approve."""
 
 from fastapi.testclient import TestClient
-
 from sales_api.main import create_app
 
 INGEST = {
