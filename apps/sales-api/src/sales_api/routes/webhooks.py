@@ -49,7 +49,11 @@ async def hubspot_webhook(request: Request) -> dict[str, Any]:
 
 def _event_to_ingest(event: dict[str, Any], hubspot: Any) -> dict[str, Any] | None:
     props = event.get("properties") if isinstance(event.get("properties"), dict) else {}
-    email = props.get("email") or event.get("propertyValue") if event.get("propertyName") == "email" else None
+        email = (
+            props.get("email") or event.get("propertyValue")
+            if event.get("propertyName") == "email"
+            else None
+        )
     if not email and event.get("propertyName") == "email":
         email = event.get("propertyValue")
 
@@ -65,12 +69,12 @@ def _event_to_ingest(event: dict[str, Any], hubspot: Any) -> dict[str, Any] | No
     country = props.get("country") or event.get("country")
     industry = props.get("industry") or event.get("industry")
 
-        if (
-            not email
-            and contact_id
-            and get_effective_access_token()
-            and hasattr(hubspot, "get_contact")
-        ):
+    if (
+        not email
+        and contact_id
+        and get_effective_access_token()
+        and hasattr(hubspot, "get_contact")
+    ):
         try:
             contact = hubspot.get_contact(contact_id)
             email = contact.get("email")
