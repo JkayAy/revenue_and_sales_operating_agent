@@ -3,6 +3,7 @@ from __future__ import annotations
 import time
 import uuid as uuid_lib
 from typing import Any
+
 from tools_hubspot import LiveHubSpotClient, MockHubSpotClient
 
 from sales_api import postgres_store as pg
