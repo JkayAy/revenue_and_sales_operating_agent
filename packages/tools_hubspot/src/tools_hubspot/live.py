@@ -6,7 +6,7 @@ from typing import Any
 
 import httpx
 
-from tools_hubspot.client import HubSpotWriteResult, MockHubSpotClient
+from tools_hubspot.client import HubSpotWriteResult
 
 HUBSPOT_API = "https://api.hubapi.com"
 # HubSpot-defined association: note → contact
